@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:1337/api";
+axios.defaults.baseURL = "https://foodie-backend-ilko.herokuapp.com/api";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const get = async (...args) => await axios.get(...args);

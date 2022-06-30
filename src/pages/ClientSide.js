@@ -9,6 +9,7 @@ import { useCart } from "react-use-cart";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/outline";
 import DataContext from "../Context";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 function ClientSide() {
   const [MenuItems, setMenuItems] = useState([]);
@@ -20,9 +21,15 @@ function ClientSide() {
 
   const { emptyCart } = useCart();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const { items, cartTotal } = useCart();
 
   const { addItem } = useCart();
+
+  function addItemToBasket(itemForBasket) {
+    enqueueSnackbar(itemForBasket.name);
+  }
 
   const navigate = useNavigate();
 
@@ -130,7 +137,7 @@ function ClientSide() {
                   <div key={feature.name} className="relative">
                     <dt>
                       <div
-                        onClick={() => addItem(feature)}
+                        onClick={() => addItemToBasket(feature)}
                         className="cursor-pointer absolute flex items-center justify-center h-12 w-12 rounded-md text-white border-gray-200 border-4 text-2xl"
                       >
                         🍝
@@ -156,7 +163,7 @@ function ClientSide() {
                   <div key={feature.id} className="relative">
                     <dt>
                       <div
-                        onClick={() => addItem(feature)}
+                        onClick={() => addItemToBasket(feature)}
                         className="cursor-pointer absolute flex items-center justify-center h-12 w-12 rounded-md text-white border-gray-200 border-4 text-2xl"
                       >
                         🥗
@@ -182,7 +189,7 @@ function ClientSide() {
                   <div key={feature.id} className="relative">
                     <dt>
                       <div
-                        onClick={() => addItem(feature)}
+                        onClick={() => addItemToBasket(feature)}
                         className="cursor-pointer absolute flex items-center justify-center h-12 w-12 rounded-md text-white border-gray-200 border-4 text-2xl"
                       >
                         🍨
@@ -208,7 +215,7 @@ function ClientSide() {
                   <div key={feature.id} className="relative">
                     <dt>
                       <div
-                        onClick={() => addItem(feature)}
+                        onClick={() => addItemToBasket(feature)}
                         className="cursor-pointer absolute flex items-center justify-center h-12 w-12 rounded-md text-white border-gray-200 border-4 text-2xl"
                       >
                         🥂

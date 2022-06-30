@@ -8,24 +8,27 @@ import { DataProvider } from "./Context";
 import ClientSide from "./pages/ClientSide";
 import { CartProvider } from "react-use-cart";
 import OrderComing from "./pages/OrderComing";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   return (
     <CartProvider>
       <DataProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            {/* public routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+        <SnackbarProvider autoHideDuration={1000}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* public routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            {/* private routes */}
-            <Route path="/main-menu" element={<ResturantDashboard />} />
-            <Route path="/menu/:id" element={<ClientSide />} />
-            <Route path="/order-coming" element={<OrderComing />} />
-          </Route>
-        </Routes>
+              {/* private routes */}
+              <Route path="/main-menu" element={<ResturantDashboard />} />
+              <Route path="/menu/:id" element={<ClientSide />} />
+              <Route path="/order-coming" element={<OrderComing />} />
+            </Route>
+          </Routes>
+        </SnackbarProvider>
       </DataProvider>
     </CartProvider>
   );

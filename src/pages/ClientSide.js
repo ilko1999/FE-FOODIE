@@ -28,6 +28,7 @@ function ClientSide() {
   const { addItem } = useCart();
 
   function addItemToBasket(itemForBasket) {
+    addItem(itemForBasket);
     enqueueSnackbar(itemForBasket.name);
   }
 

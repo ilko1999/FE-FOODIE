@@ -9,6 +9,9 @@ import ClientSide from "./pages/ClientSide";
 import { CartProvider } from "react-use-cart";
 import OrderComing from "./pages/OrderComing";
 import { SnackbarProvider } from "notistack";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
+import ErrorPage from "./pages/ErrorPage";
+import PageMasterer from "./pages/PageMasterer";
 
 function App() {
   return (
@@ -23,10 +26,21 @@ function App() {
               <Route path="/register" element={<Register />} />
 
               {/* private routes */}
-              <Route path="/main-menu" element={<ResturantDashboard />} />
+              <Route
+                path="/main-menu"
+                element={
+                  <PageMasterer
+                    errorPage={<UnauthorizedPage />}
+                    defaultPage={<ResturantDashboard />}
+                  />
+                }
+              />
+
               <Route path="/menu/:id" element={<ClientSide />} />
               <Route path="/order-coming" element={<OrderComing />} />
             </Route>
+
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </SnackbarProvider>
       </DataProvider>

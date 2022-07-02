@@ -7,6 +7,7 @@ export function DataProvider({ children }) {
   const [chosenMenu, setChosenMenu] = useState("dashboard");
   const [state, updateState] = useState("");
   const [resturantName, setresturantName] = useState("");
+  const [hasAuth, setHasAuth] = useState(false);
 
   const initialArray = [];
   const [cartItems, setCartItems] = useState(initialArray);
@@ -39,6 +40,8 @@ export function DataProvider({ children }) {
         state,
         updateState,
         resturantName,
+        hasAuth,
+        setHasAuth,
       }}
     >
       {children}

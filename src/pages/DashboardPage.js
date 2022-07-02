@@ -4,8 +4,12 @@ import { parse } from "papaparse";
 import QrCode from "qrcode";
 import lunchMenuFlow from "../api/lunchMenuFlow";
 import DataContext from "../Context";
-import { bake_cookie, delete_cookie, download } from "../constData";
-import { read_cookie } from "../constData";
+import {
+  bake_cookie,
+  delete_cookie,
+  download,
+  read_cookie,
+} from "../constData";
 
 function DashboardPage() {
   const { MenuItems, setMenuItems } = useContext(DataContext);

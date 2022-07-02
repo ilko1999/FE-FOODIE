@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import loginPerson from "../assets/login.svg";
 import userFlow from "../api/userFlow";
 import Alert from "../components/alert/alert";
 import { useNavigate } from "react-router-dom";
 import { bake_cookie, delete_cookie } from "../constData";
+import DataContext from "../Context";
 
 function Login() {
   useEffect(() => {
@@ -18,6 +19,7 @@ function Login() {
   const [isSubmit, setisSubmit] = useState(false);
   const [loginError, setLoginError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const { setHasAuth } = useContext(DataContext);
 
   const [isChecked, setisChecked] = useState(false);
 
@@ -42,6 +44,7 @@ function Login() {
       setIsLoading(false);
       bake_cookie("user", response.data);
       navigate("/main-menu");
+      setHasAuth(true);
     } catch (err) {
       setLoginError(err.response.data);
       setIsLoading(false);

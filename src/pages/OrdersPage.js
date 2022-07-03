@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Table from "../components/table/table";
 import lunchMenuFlow from "../api/lunchMenuFlow";
 import { read_cookie } from "../constData";
@@ -9,20 +9,20 @@ function OrdersPage() {
   const [resturantOrFastFood, setResturantOrFastFood] = useState("");
   const { state } = useContext(DataContext);
 
-  async function getOrderedItems(resturant) {
+  const getItems = useCallback(async (resturant) => {
     try {
       const result = await lunchMenuFlow.getOrderedItems(resturant);
-      setOrderedItems(result.data);
+      setOrderedItems(result.data.data);
     } catch (error) {
       console.log(error);
     }
-  }
+  }, []);
 
   useEffect(() => {
     const cookieData = read_cookie("user");
-    getOrderedItems(cookieData.username);
+    getItems(cookieData.username);
     setResturantOrFastFood(cookieData.typeOfResturant);
-  }, [state]);
+  }, [getItems, setOrderedItems, state]);
 
   return (
     <div className="flex h-full flex-col justify-center items-center">

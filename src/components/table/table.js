@@ -121,31 +121,42 @@ export default function CollapsibleTable({
   orderedItems,
   resturantOrFastFood,
 }) {
+  console.log(orderedItems);
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>
-              {resturantOrFastFood === "resturant"
-                ? "TableNumber"
-                : "Person Name"}
-            </TableCell>
-            <TableCell>Status of order</TableCell>
-            <TableCell align="right">Total Price for the table</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {orderedItems.map((row) => (
-            <Row
-              resturantOrFastFood={resturantOrFastFood}
-              key={row._id}
-              row={row}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {orderedItems.length === 0 ? (
+        <div className="flex justify-center">
+          <span className="font-semibold text-3xl">
+            Oops, sorry but it seems like you dont have any orders...🙅‍♂️📦
+          </span>
+        </div>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>
+                  {resturantOrFastFood === "resturant"
+                    ? "TableNumber"
+                    : "Person Name"}
+                </TableCell>
+                <TableCell>Status of order</TableCell>
+                <TableCell align="right">Total Price for the table</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {orderedItems.map((row) => (
+                <Row
+                  resturantOrFastFood={resturantOrFastFood}
+                  key={row._id}
+                  row={row}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
   );
 }
